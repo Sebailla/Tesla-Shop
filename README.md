@@ -24,14 +24,15 @@ docker-compose up -d
 
 6. Llenar variables de entorno definidas en el ```.env```
 
-7. Recargar/Recontruir Base de Datos con la semilla
-```
-http://localhost:3000/api/v1/seed
-```
-8. Correr App
+7. Correr App
 ```
 npm run start
 ```
+8. Recargar/Recontruir Base de Datos con la semilla
+```
+http://localhost:3000/api/v1/seed
+```
+
 
 
 ## Stack usado:
