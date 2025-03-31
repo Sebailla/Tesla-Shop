@@ -8,8 +8,10 @@ import { Response } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { ValidRoles } from 'src/auth/interfaces/valid-roles.interface';
+import { ApiTags } from '@nestjs/swagger';
 
 
+@ApiTags('Files')
 @Controller('files')
 export class FilesController {
   constructor(

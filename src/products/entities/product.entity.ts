@@ -1,50 +1,99 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, Entity, LegacyOracleNamingStrategy, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { ProductImage } from "./product-images.entity";
 import { User } from "src/auth/entities/user.entity"
 import { ManyToOne } from "typeorm"
+import { ApiProperty } from "@nestjs/swagger";
 
 @Entity({name: 'products'})
 export class Product {
 
+    @ApiProperty({
+        example: '01e3cc7e-1659-485f-b000-93e6452890e9',
+        description: 'Product ID',
+        uniqueItems: true,
+        nullable: false
+    })
     @PrimaryGeneratedColumn('uuid')
     id: string
 
+    @ApiProperty({
+        example: 'Men’s 3D Small Wordmark Tee',
+        description: 'Product Title',
+        uniqueItems: true,
+        nullable: false
+    })
     @Column('text', {
         unique: true,
         nullable: false,
     })
     title: string
 
-    @Column('float', {
-        default: 0
+    @ApiProperty({
+        example: 'Designed for comfort and style in any size, the Tesla Small Wordmark Tee is made from 100% Peruvian cotton .',
+        description: 'Product Description',
+        nullable: true
     })
-    price: number;
-
     @Column({
         type: 'text',
         nullable: true
     })
     description: string;
 
+    @ApiProperty({
+        example: 90.99,
+        description: 'Product Price',
+        default:0
+    })
+    @Column('float', {
+        default: 0
+    })
+    price: number;
+
+    @ApiProperty({
+        example: 'men_3d_small_wordmark_tee',
+        description: 'Product SLUG - for SEO',
+        uniqueItems: true,
+        nullable: true
+    })
     @Column('text', {
         unique: true,
         nullable: true
     })
     slug: string;
 
+    @ApiProperty({
+        example: 10,
+        description: 'Product Stock',
+        default: 0
+    })
     @Column('int', {
         default: 0
     })
     stock: number;
 
+    @ApiProperty({
+        example: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+        description: 'Product Sizes',
+        nullable: true
+    })
     @Column('text', {
         array: true
     })
     sizes: string[];
 
+    @ApiProperty({
+        example: 'men',
+        description: 'Product Gender',
+        nullable: true
+    })
     @Column('text')
     gender: string;
 
+    @ApiProperty({
+        example: ['T-Shirt', 'Shirt', 'Jacket'],
+        description: 'Product Tags',
+        nullable: true
+    })
     @Column('text', {
         array: true,
         default: []
